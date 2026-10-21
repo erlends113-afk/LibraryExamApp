@@ -1,0 +1,25 @@
+@model IEnumerable<LibraryExamApp.Models.Entities.Category>
+@{ ViewData["Title"] = "Kategorijas"; }
+
+<h2>🏷️ Kategoriju saraksts</h2>
+<table class="table table-bordered table-hover shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nosaukums</th>
+            <th>Apraksts</th>
+            <th>Statuss</th>
+            <th>Grāmatu skaits</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td class="fw-bold">@c.Title</td>
+                <td>@c.Description</td>
+                <td>@(c.IsActive ? "✅ Aktīva" : "❌ Neaktīva")</td>
+                <td><span class="badge bg-secondary">@c.Books.Count grāmatas</span></td>
+            </tr>
+        }
+    </tbody>
+</table>

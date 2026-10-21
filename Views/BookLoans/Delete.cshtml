@@ -1,0 +1,10 @@
+@model LibraryExamApp.Models.Entities.BookLoan
+@{ ViewData["Title"] = "Dzēst aizņēmumu"; }
+
+<h2 class="text-danger">Dzēst aizņēmuma ierakstu</h2>
+<p>Vai tiešām vēlaties dzēst ierakstu par grāmatu: <strong>@Model.Book?.Title</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Jā, izdzēst</button>
+    <a asp-action="Index" class="btn btn-secondary">Atcelt</a>
+</form>

@@ -1,0 +1,97 @@
+@{ ViewData["Title"] = "5 LINQ Atskaites"; }
+
+<h1 class="mb-4">📊 5 LINQ Vaicājumu atskaišu panelis</h1>
+
+<!-- 1. VAICĀJUMS -->
+<div class="card mb-4 shadow-sm border-primary">
+    <div class="card-header bg-primary text-white">
+        <h5>1. Filtrēšana un Kārtošana (Where + OrderByDescending)</h5>
+    </div>
+    <div class="card-body">
+        <form method="get" class="row g-2 mb-3">
+            <div class="col-auto">
+                <input type="number" step="1" name="minPrice" class="form-control" placeholder="Minimālā cena..." />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-primary">Filtrēt</button>
+            </div>
+        </form>
+        <table class="table table-sm table-bordered">
+            <thead><tr><th>Nosaukums</th><th>Cena</th><th>Gads</th><th>Autors</th></tr></thead>
+            <tbody>
+                @foreach (var b in ViewBag.Query1)
+                {
+                    <tr><td>@b.Title</td><td>@b.Price.ToString("C")</td><td>@b.PublishYear</td><td>@b.AuthorName</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 2. VAICĀJUMS -->
+<div class="card mb-4 shadow-sm border-info">
+    <div class="card-header bg-info text-dark">
+        <h5>2. Saistītie dati (Include: Grāmata + Lasītājs no 3 tabulām)</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-sm table-bordered">
+            <thead><tr><th>Grāmata</th><th>Lasītājs</th><th>Termiņš</th><th>Sods</th></tr></thead>
+            <tbody>
+                @foreach (var l in ViewBag.Query2)
+                {
+                    <tr><td>@l.BookTitle</td><td>@l.MemberName</td><td>@l.DueDate.ToString("yyyy-MM-dd")</td><td>@l.Fine.ToString("C")</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 3. VAICĀJUMS -->
+<div class="card mb-4 shadow-sm border-success">
+    <div class="card-header bg-success text-white">
+        <h5>3. Grupēšana un Apkopojums (GroupBy: Skaits un Vidējā cena pa kategorijām)</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-sm table-bordered">
+            <thead><tr><th>Kategorija</th><th>Grāmatu skaits</th><th>Vidējā cena</th></tr></thead>
+            <tbody>
+                @foreach (var c in ViewBag.Query3)
+                {
+                    <tr><td>@c.CategoryName</td><td>@c.BookCount</td><td>@c.AvgPrice.ToString("C")</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 4. VAICĀJUMS -->
+<div class="card mb-4 shadow-sm border-warning">
+    <div class="card-header bg-warning text-dark">
+        <h5>4. Agregāti ar nosacījumiem (Any, Count, Max)</h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">Ir nesamaksāti sodi (Any): <strong>@(ViewBag.Query4.HasAnyUnpaidFines ? "Jā ⚠️" : "Nē")</strong></li>
+            <li class="list-group-item">Kavēto aizņēmumu skaits (Count): <strong>@ViewBag.Query4.TotalOverdueCount</strong></li>
+            <li class="list-group-item">Lielākais piemērotais sods (Max): <strong>@ViewBag.Query4.MaxFine.ToString("C")</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- 5. VAICĀJUMS -->
+<div class="card mb-4 shadow-sm border-secondary">
+    <div class="card-header bg-secondary text-white">
+        <h5>5. Brīvā izvēle: Autoru reitings pēc aizņemto grāmatu popularitātes</h5>
+    </div>
+    <div class="card-body">
+        <ol class="list-group list-group-numbered">
+            @foreach (var a in ViewBag.Query5)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @a.AuthorName
+                    <span class="badge bg-primary rounded-pill">Paņemts @a.TotalTimesBorrowed reizes</span>
+                </li>
+            }
+        </ol>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@model IEnumerable<LibraryExamApp.Models.Entities.Book>
+@{
+    ViewData["Title"] = "Grāmatu saraksts";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>📚 Grāmatu saraksts (CRUD)</h2>
+    <a asp-action="Create" class="btn btn-primary">+ Pievienot jaunu grāmatu</a>
+</div>
+
+<table class="table table-hover table-bordered table-striped shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Nosaukums</th>
+            <th>ISBN</th>
+            <th>Cena</th>
+            <th>Gads</th>
+            <th>Autors</th>
+            <th>Kategorija</th>
+            <th class="text-center" style="width: 180px;">Darbības</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="fw-bold">@item.Title</td>
+                <td><code>@item.ISBN</code></td>
+                <td class="text-success">@item.Price.ToString("C")</td>
+                <td>@item.PublishYear</td>
+                <td>@item.Author?.FullName</td>
+                <td><span class="badge bg-secondary">@item.Category?.Title</span></td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">Labot</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Dzēst</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Detaļas</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

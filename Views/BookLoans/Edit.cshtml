@@ -1,0 +1,42 @@
+@model LibraryExamApp.Models.Entities.BookLoan
+@{ ViewData["Title"] = "Labot aizņēmumu"; }
+
+<h2>Labot aizņēmumu</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="BookId" class="form-label"></label>
+                <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="MemberId" class="form-label"></label>
+                <select asp-for="MemberId" class="form-select" asp-items="ViewBag.MemberId"></select>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="LoanDate" class="form-label"></label>
+                    <input asp-for="LoanDate" class="form-control" type="date" />
+                </div>
+                <div class="col">
+                    <label asp-for="DueDate" class="form-label"></label>
+                    <input asp-for="DueDate" class="form-control" type="date" />
+                </div>
+            </div>
+            <div class="mb-3 form-check">
+                <input asp-for="IsReturned" class="form-check-input" />
+                <label asp-for="IsReturned" class="form-check-label"></label>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FineAmount" class="form-label"></label>
+                <input asp-for="FineAmount" class="form-control" step="0.5" />
+            </div>
+            <button type="submit" class="btn btn-primary">Atjaunot</button>
+            <a asp-action="Index" class="btn btn-secondary">Atcelt</a>
+        </form>
+    </div>
+</div>

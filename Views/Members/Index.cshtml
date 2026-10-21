@@ -1,0 +1,27 @@
+@model IEnumerable<LibraryExamApp.Models.Entities.Member>
+@{ ViewData["Title"] = "Lasītāji"; }
+
+<h2>👥 Reģistrētie lasītāji</h2>
+<table class="table table-bordered table-striped shadow-sm mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Vārds, Uzvārds</th>
+            <th>E-pasts</th>
+            <th>Tālrunis</th>
+            <th>Reģistrācijas datums</th>
+            <th>Statuss</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td class="fw-bold">@m.FullName</td>
+                <td>@m.Email</td>
+                <td>@m.Phone</td>
+                <td>@m.RegisteredDate.ToString("yyyy-MM-dd")</td>
+                <td>@(m.IsActive ? "✅ Aktīvs" : "❌ Bloķēts")</td>
+            </tr>
+        }
+    </tbody>
+</table>

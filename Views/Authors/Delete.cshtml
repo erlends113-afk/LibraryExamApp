@@ -1,0 +1,10 @@
+@model LibraryExamApp.Models.Entities.Author
+@{ ViewData["Title"] = "Dzēst autoru"; }
+
+<h2 class="text-danger">Dzēst autoru</h2>
+<p>Vai tiešām vēlaties dzēst autoru <strong>@Model.FullName</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Jā, izdzēst</button>
+    <a asp-action="Index" class="btn btn-secondary">Atcelt</a>
+</form>
